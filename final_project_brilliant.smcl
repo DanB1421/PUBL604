@@ -1,0 +1,179 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/drbrilliant2552/Documents/PUBL604/final_project_brilliant.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 8 May 2023, 16:18:04
+{txt}
+{com}. 
+. import excel using "/Users/drbrilliant2552/Documents/PUBL604/FoodImports.xlsx", sheet("Meat ANOVA") firstrow
+{res}{text}(3 vars, 38 obs)
+
+{com}. 
+. save MeatANOVA.dta, replace
+{txt}{p 0 4 2}
+file {bf}
+MeatANOVA.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. use MeatANOVA.dta
+{txt}
+{com}. 
+. tabulate ProductGroup CountryLocationofImport
+
+                      {txt}{c |}                               Country/Location of Import
+        Product Group {c |} Argentina  Australia     Brazil     Canada      Chile  China (..      Italy     Mexico {c |}     Total
+{hline 22}{c +}{hline 88}{c +}{hline 10}
+ Fowl and other meats {c |}{res}         0          0          0          1          1          1          0          0 {txt}{c |}{res}         5 
+{txt}Fresh or chilled re.. {c |}{res}         1          1          0          1          0          0          0          1 {txt}{c |}{res}         7 
+{txt}Frozen red meats an.. {c |}{res}         0          1          1          1          0          0          0          1 {txt}{c |}{res}         7 
+{txt}       Prepared meats {c |}{res}         0          0          1          1          0          0          1          1 {txt}{c |}{res}         9 
+{txt}{hline 22}{c +}{hline 88}{c +}{hline 10}
+                Total {c |}{res}         1          2          2          4          1          1          1          3 {txt}{c |}{res}        28 
+
+
+                      {txt}{c |}                    Country/Location of Import
+        Product Group {c |} New Zea..  Nicaragua     Poland  Rest of..      Spain    Uruguay {c |}     Total
+{hline 22}{c +}{hline 66}{c +}{hline 10}
+ Fowl and other meats {c |}{res}         1          0          0          1          0          0 {txt}{c |}{res}         5 
+{txt}Fresh or chilled re.. {c |}{res}         1          1          0          1          0          0 {txt}{c |}{res}         7 
+{txt}Frozen red meats an.. {c |}{res}         1          0          0          1          0          1 {txt}{c |}{res}         7 
+{txt}       Prepared meats {c |}{res}         1          0          1          1          1          1 {txt}{c |}{res}         9 
+{txt}{hline 22}{c +}{hline 66}{c +}{hline 10}
+                Total {c |}{res}         4          1          1          4          1          2 {txt}{c |}{res}        28 
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Fowl and other meats"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          5      120.58    168.6659        7.2      406.7
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Fresh or chilled red meats"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          7    833.2429    1207.346       67.8     3254.4
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Frozen red meats and parts"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          7    581.6286    248.6728      263.6      909.1
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Prepared meats"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          9    219.7889     253.911       51.3      786.4
+{txt}
+{com}. 
+. oneway ImportValue ProductGroup
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 2168498.76      3    722832.92      1.78     0.1779
+{txt} Within groups     {res} 9746692.27     24   406112.178
+{txt}{hline 72}
+    Total          {res}   11915191     27   441303.371
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res} 26.9835{txt}    Prob>chi2 = {res}0.000
+{txt}
+{com}. 
+. clear
+{txt}
+{com}. 
+. import excel using "/Users/drbrilliant2552/Documents/PUBL604/FoodImports.xlsx", sheet("Fish ANOVA") firstrow
+{res}{text}(3 vars, 32 obs)
+
+{com}. 
+. save FishANOVA.dta, replace
+{txt}{p 0 4 2}
+file {bf}
+FishANOVA.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. use FishANOVA.dta
+{txt}
+{com}. 
+. tabulate ProductGroup CountryLocationofImport
+
+                      {txt}{c |}                               Country/Location of Import
+        Product Group {c |} Argentina     Brazil     Canada      Chile  China (..    Ecuador  Faroe I..      India {c |}     Total
+{hline 22}{c +}{hline 88}{c +}{hline 10}
+Fish fillets and mi.. {c |}{res}         0          0          1          1          1          0          0          0 {txt}{c |}{res}         7 
+{txt}Prepared fish and s.. {c |}{res}         0          0          1          1          1          1          0          1 {txt}{c |}{res}         9 
+{txt}Shellfish, fresh or.. {c |}{res}         1          0          1          0          0          1          0          1 {txt}{c |}{res}         9 
+{txt}Whole fish--fresh, .. {c |}{res}         0          1          1          1          0          0          1          0 {txt}{c |}{res}         7 
+{txt}{hline 22}{c +}{hline 88}{c +}{hline 10}
+                Total {c |}{res}         1          1          4          3          2          2          1          2 {txt}{c |}{res}        32 
+
+
+                      {txt}{c |}                               Country/Location of Import
+        Product Group {c |} Indonesia      Japan     Mexico     Norway  Rest of..     Russia   Thailand    Vietnam {c |}     Total
+{hline 22}{c +}{hline 88}{c +}{hline 10}
+Fish fillets and mi.. {c |}{res}         1          0          0          1          1          0          0          1 {txt}{c |}{res}         7 
+{txt}Prepared fish and s.. {c |}{res}         1          0          0          0          1          0          1          1 {txt}{c |}{res}         9 
+{txt}Shellfish, fresh or.. {c |}{res}         1          1          1          0          1          1          0          0 {txt}{c |}{res}         9 
+{txt}Whole fish--fresh, .. {c |}{res}         0          0          1          1          1          0          0          0 {txt}{c |}{res}         7 
+{txt}{hline 22}{c +}{hline 88}{c +}{hline 10}
+                Total {c |}{res}         3          1          2          2          4          1          1          2 {txt}{c |}{res}        32 
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Fish fillets and mince"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          7      1361.4    914.7624      332.6     2895.7
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Prepared fish and shellfish"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          9    725.5778     434.809      145.3     1473.7
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Shellfish, fresh or frozen"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          9    1209.211    809.8952      347.7     2395.6
+{txt}
+{com}. 
+. summarize ImportValue if ProductGroup == "Whole fish--fresh, chilled, or frozen"
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}ImportValue {c |}{res}          7    511.7857    547.1085      148.8     1581.5
+{txt}
+{com}. 
+. oneway ImportValue ProductGroup
+
+                        {txt}Analysis of variance
+    Source              SS         df      MS            F     Prob > F
+{hline 72}
+Between groups     {res} 3586482.24      3   1195494.08      2.47     0.0829
+{txt} Within groups     {res} 13576621.2     28    484879.33
+{txt}{hline 72}
+    Total          {res} 17163103.5     31   553648.499
+
+{txt}Bartlett's equal-variances test: chi2({res}3{txt}) = {res}  4.4659{txt}    Prob>chi2 = {res}0.215
+{txt}
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/drbrilliant2552/Documents/PUBL604/final_project_brilliant.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 8 May 2023, 16:18:04
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
